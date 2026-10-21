@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi campus · Grado en Marketing VIU</title>
+<style>
+:root{--bg:#f3f4f6;--card:#fff;--ink:#1a2330;--mut:#5b6676;--line:#dce0e6;--acc:#0f5c63;--ok:#2f7d4f;--warn:#a65b00}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 "Segoe UI",system-ui,sans-serif;color:var(--ink);background:var(--bg)}
+h1,h2,h3{font-family:Cambria,Georgia,serif;line-height:1.2;margin:0 0 .5rem}
+h1{font-size:1.9rem}h2{font-size:1.2rem}
+.app{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:100vh}
+nav{background:#14343a;color:#e8f1f2;padding:20px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px;overflow:auto}
+nav .brand{padding:0 8px 14px}nav .brand h2{color:#fff;margin:0}nav small{color:#a9c4c7;font-size:12px;line-height:1.4}
+nav a{color:#e8f1f2;text-decoration:none;padding:8px 10px;border-radius:6px}
+nav a:hover{background:rgba(255,255,255,.08)}nav a.on{background:rgba(255,255,255,.18);font-weight:600}
+nav .foot{margin-top:auto;display:flex;flex-direction:column;gap:8px;padding-top:14px}
+main{padding:28px clamp(16px,4vw,44px) 48px;max-width:1180px;width:100%}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.hero{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:8px;padding:22px;margin:14px 0 16px}
+.hero .big{font:600 2rem/1.15 Cambria,Georgia,serif;margin:4px 0}
+.mut{color:var(--mut)}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:#fff;background:var(--c);border-radius:4px;padding:0 6px}
+.badge{display:inline-block;font-size:12px;padding:0 8px;border-radius:99px;border:1px solid;white-space:nowrap}
+.b-of{color:var(--ok);background:#e8f4ec;border-color:#b9dcc6}
+.b-rec{color:#1f5f9e;background:#e6f0fa;border-color:#b7d1ea}
+.b-pc{color:var(--warn);background:#fdf0dc;border-color:#ecc88c}
+.b-el{color:var(--mut);background:#eef0f3;border-color:var(--line)}
+.ev{display:flex;gap:12px;padding:6px 0 6px 10px;margin-top:8px;border-left:4px solid var(--c)}
+.ev .when{min-width:104px;font-size:13px}
+.bar{height:8px;background:#e4e7ec;border-radius:4px;overflow:hidden}.bar i{display:block;height:100%;background:var(--c,var(--acc))}
+.sc{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600;font-size:13px}
+.btn{font:inherit;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:6px;padding:5px 12px;cursor:pointer}
+.btn:hover{border-color:var(--acc)}nav .btn{background:transparent;color:#e8f1f2;border-color:rgba(255,255,255,.35)}
+input,select{font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink)}
+:focus-visible{outline:3px solid #f2b705;outline-offset:2px}
+.bar-top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.cal>div{background:#fff;min-height:92px;padding:4px}.cal .hd{min-height:0;text-align:center;font-weight:600;color:var(--mut);font-size:13px}
+.cal .off{background:#f7f8fa}.day{cursor:pointer}.day:hover{background:#f0f7f7}.day.today .n{background:var(--acc);color:#fff;border-radius:50%;padding:0 6px}
+.day.sel{outline:2px solid var(--acc);outline-offset:-2px}.day .n{font-size:13px;font-weight:600}
+.chip{display:block;font-size:11px;margin-top:2px;padding:0 4px;border-left:3px solid var(--c);background:#f1f3f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.more{font-size:11px;color:var(--mut)}
+code{font-size:12px;background:#eef0f3;padding:0 4px;border-radius:4px;word-break:break-all}
+.asig{border-top:5px solid var(--c)}
+@media(max-width:800px){
+ .app{grid-template-columns:1fr}nav{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}
+ nav .brand{width:100%;padding-bottom:4px}nav .foot{margin-top:8px;flex-direction:row;flex-wrap:wrap;width:100%}
+ .cal>div{min-height:58px;padding:2px}.chip{font-size:0;height:6px;border-left:0;background:var(--c);border-radius:3px}
+ .hero .big{font-size:1.5rem}.ev{flex-direction:column;gap:2px}
+}
+
+:root{--bg:#f4f3ef;--card:#fff;--ink:#14213d;--mut:#667085;--line:#e4e2da;--acc:#3b5bdb;--nav:#0f1b3d;--sh:0 1px 2px rgba(15,27,61,.05),0 6px 18px rgba(15,27,61,.06)}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1224;--card:#151b33;--ink:#e8ebf5;--mut:#9aa3bd;--line:#262e4d;--acc:#7c93ff;--nav:#090e1f;--sh:0 1px 2px rgba(0,0,0,.4)}
+.btn,input,select,textarea,.cal>div{background:var(--card)!important;color:var(--ink)}.cal .off{background:var(--bg)!important}.chip{background:var(--line)}.badge{background:transparent!important}.day:hover{background:var(--line)!important}th,td{border-color:var(--line)}code{background:var(--line)}}
+body{font:15.5px/1.6 Inter,"Segoe UI",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Inter,"Segoe UI",system-ui,sans-serif;letter-spacing:-.02em;font-weight:700}h1{font-size:2rem;margin-bottom:.35rem}h2{font-size:1.1rem}
+.hero .big{font-family:inherit;letter-spacing:-.02em}
+nav{background:var(--nav);padding:22px 12px;gap:2px}nav .brand h2{font-size:1.2rem}
+nav a{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;color:#b9c3e0;transition:.18s}nav a:hover{background:rgba(255,255,255,.07);color:#fff}
+nav a.on{background:var(--acc);color:#fff;box-shadow:0 4px 14px rgba(59,91,219,.35)}nav a svg{flex:none}
+main{animation:fi .35s ease both}@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card,.hero{border-radius:14px;box-shadow:var(--sh);border-color:var(--line);transition:transform .2s,box-shadow .2s}
+.grid>.card:hover,.sc-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(15,27,61,.12)}
+.hero{padding:26px}.btn{border-radius:10px;padding:7px 14px;transition:.15s;font-weight:500}.btn:hover{transform:translateY(-1px);border-color:var(--acc);color:var(--acc)}
+.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}.btn.pri:hover{color:#fff;filter:brightness(1.1)}.btn.dng{color:#b42318}
+input,select,textarea{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);max-width:100%}textarea{width:100%;min-height:84px}
+.bar{height:9px;border-radius:99px}.bar i{border-radius:99px;transition:width .5s}
+.sg{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.sc-card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh);padding:16px;border-top:4px solid var(--c);display:flex;flex-direction:column;gap:8px;transition:.2s}
+.num{font:700 .8rem/1 inherit;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.empty{border:2px dashed var(--line);border-radius:14px;padding:32px;text-align:center;color:var(--mut)}
+.vid{position:relative;padding-top:56.25%;border-radius:12px;overflow:hidden;background:#000}.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.fl{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.fl label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mut);font-weight:600}.fl .w{grid-column:1/-1}
+.pill{display:inline-block;font-size:12px;padding:1px 9px;border-radius:99px;background:var(--line);color:var(--mut);margin:0 4px 4px 0}
+@media(max-width:800px){nav{flex-direction:row;flex-wrap:nowrap;overflow-x:auto;padding:10px;gap:4px}nav .brand,nav .foot{display:none}nav a{flex:none;padding:8px 12px}nav a span{font-size:13px}h1{font-size:1.6rem}}
+
+:root{--bg:#f1f1ef;--card:#fff;--ink:#23262b;--mut:#6b7078;--line:#e1e1dd;--acc:#c0262d;--nav:#2a2d32;--sh:0 1px 2px rgba(20,22,26,.06),0 8px 22px rgba(20,22,26,.06)}
+@media(prefers-color-scheme:dark){:root{--bg:#17181b;--card:#222428;--ink:#ececec;--mut:#a0a4ab;--line:#33363b;--acc:#e0454b;--nav:#101113;--sh:0 1px 2px rgba(0,0,0,.5)}}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+nav a{color:#c4c7cc}nav a.on{background:var(--acc);box-shadow:0 4px 14px rgba(192,38,45,.35)}nav small{color:#9ea2a9}
+.btn:hover{color:var(--acc);border-color:var(--acc)}.btn.pri,.btn.pri:hover{color:#fff}.btn.pri{background:var(--acc);border-color:var(--acc)}
+.grid>.card:hover,.sc-card:hover{box-shadow:0 12px 30px rgba(20,22,26,.14)}
+.cov{position:relative;height:110px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#25282c,#464a52)}.cov.big{height:180px}
+.cov svg{position:absolute;inset:0;width:100%;height:100%}.cov:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent 65%)}
+.cov span{position:absolute;z-index:1;left:14px;bottom:10px;color:#fff;font-weight:700;letter-spacing:.1em;font-size:.8rem}
+.asig{border-top:0!important;padding:12px 12px 16px}.asig>:not(.cov){padding:0 4px}
+@media(min-width:801px) and (max-width:1100px){.app{grid-template-columns:200px minmax(0,1fr)}main{padding:24px 20px 40px}}
+@media(max-width:800px){.cov.big{height:130px}.bar-top>*{max-width:100%}table{font-size:13px}}
+.banner{position:relative;min-height:clamp(210px,30vw,320px);border-radius:18px;overflow:hidden;background:#25282c;box-shadow:var(--sh);display:flex;align-items:flex-end;margin-bottom:6px}
+.banner svg{position:absolute;inset:0;width:100%;height:100%}.banner:after{content:"";position:absolute;inset:0;background:linear-gradient(to right,rgba(16,17,19,.78),rgba(16,17,19,.15) 70%)}
+.banner .bt{position:relative;z-index:1;padding:clamp(18px,3vw,36px);color:#fff}.banner .bt small{display:block;color:#d9dbe0;letter-spacing:.12em;text-transform:uppercase;font-size:12px;font-weight:600;margin-bottom:6px}
+.banner h1{color:#fff;margin:0;font-size:clamp(1.7rem,4.5vw,2.8rem);max-width:16ch;line-height:1.1}.banner i{display:block;width:56px;height:4px;background:var(--acc);border-radius:2px;margin-top:14px}
+
+
+#gate{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(20,22,26,.78)}#gate.open{display:flex}
+.gcard{width:min(400px,100%);background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.gh{background:#25282c;color:#fff;padding:26px}.gh small{display:block;color:#c4c7cc;letter-spacing:.12em;text-transform:uppercase;font-size:12px;margin-bottom:6px}.gh h1{color:#fff;margin:0}.gh i{display:block;width:48px;height:4px;background:var(--acc);border-radius:2px;margin-top:12px}
+#gf{padding:24px;display:grid;gap:14px}#gf label{display:grid;gap:5px;font-size:13px;font-weight:600;color:var(--mut)}#gf input{width:100%}#gf .btn{padding:11px}#gmsg{margin:0;min-height:1.2em;color:#b42318;font-size:14px}
+.cloud{position:fixed;bottom:12px;right:12px;z-index:20;display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 6px 5px 14px;box-shadow:var(--sh);font-size:13px}
+#sync[data-k=err],#sync[data-k=errc]{color:#b42318;font-weight:600}#sync[data-k=ok]{color:#2f7d4f}@media(max-width:800px){#who{display:none}}
+.gtabs{display:flex;border-bottom:1px solid var(--line)}.gtabs button{flex:1;font:inherit;font-weight:600;padding:12px;border:0;background:transparent;color:var(--mut);cursor:pointer;border-bottom:3px solid transparent}.gtabs button.on{color:var(--ink);border-bottom-color:var(--acc)}
+#gmsg.ok{color:#2f7d4f}
+body.anon .po{display:none!important}body:not(.anon) .ao{display:none!important}
+.sg .sc-card h3{font-size:1.05rem}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+</head>
+<body class="anon">
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gt"><div class="gcard"><div class="gh"><small>Grado en Marketing · VIU</small><h1 id="gt">Mi campus</h1><i></i></div>
+<div class="gtabs"><button type="button" class="on" data-gm="in">Iniciar sesión</button><button type="button" data-gm="up">Crear cuenta</button></div>
+<form id="gf" novalidate><p class="mut" id="ginfo" style="margin:0"></p><label>Correo electrónico<input id="ge" type="email" autocomplete="username" required></label><label>Contraseña<input id="gp" type="password" autocomplete="current-password" required></label><button class="btn pri" id="gb" type="submit">Iniciar sesión</button><p id="gmsg" role="alert"></p><button type="button" class="btn" id="gx">Continuar sin cuenta</button></form></div></div>
+<div class="cloud"><span id="sync" class="po" data-k="load"></span><span id="who" class="mut"></span><button class="btn pri ao" id="inb">Iniciar sesión</button><button class="btn po" id="out">Cerrar sesión</button></div>
+<div class="app">
+<nav aria-label="Secciones">
+ <div class="brand"><h2>Mi campus</h2><small>Grado en Marketing · VIU</small></div>
+ <a href="#inicio"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></a><a href="#asignaturas"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19V5"/></svg><span>Mis asignaturas</span></a><a href="#sesiones"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM10 9l5 3-5 3z"/></svg><span>Explicaciones por sesión</span></a><a href="#calendario"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM3 10h18M8 3v4M16 3v4"/></svg><span>Calendario</span></a><a href="#tareas"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg><span>Tareas</span></a><a href="#biblioteca"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h4v16H4zM10 4h4v16h-4zM16 6l4 1-3 13-4-1z"/></svg><span>Biblioteca</span></a><a href="#progreso"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span>Progreso</span></a>
+ <div class="foot">
+  <button class="btn ao" id="nav-login">Iniciar sesión para guardar progreso</button>
+  <button class="btn po" data-act="exp">Guardar copia de mis datos</button>
+  <button class="btn po" data-act="imp">Cargar copia</button>
+  <small class="po">Tu progreso se guarda en tu cuenta y se sincroniza entre dispositivos. Guarda una copia de seguridad de vez en cuando.</small>
+  <small class="ao">Estás como invitado: puedes ver todo el contenido sin cuenta. Crea una cuenta solo si quieres guardar tu progreso.</small>
+  <input type="file" id="imp" accept=".json" hidden>
+ </div>
+</nav>
+<main id="main"></main>
+</div>
+<noscript>Esta página necesita JavaScript activado.</noscript>
+<script>
+/* ===== DATOS (generados desde tu Calendario_Marketing_VIU_2026-2027.xlsx y tus archivos .md) ===== */
+const D={"curso":"Curso 1 · 1.er cuatrimestre · 2026–27","asig":[{"c":"04GMAR","n":"Introducción a la Economía","k":"ECO","ses":11,"temas":[{"id":"T01","n":"Tema 1"},{"id":"T02","n":"Tema 2"},{"id":"T03","n":"Tema 3"},{"id":"T04","n":"Tema 4"},{"id":"T05","n":"Tema 5"},{"id":"T06","n":"Tema 6"},{"id":"T07","n":"Tema 7"},{"id":"T08","n":"Tema 8"}],"ruta":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/04GMAR_ECONOMIA"},{"c":"03GMAR","n":"Estadística Aplicada al Marketing","k":"EST","ses":17,"temas":[{"id":"UA1","n":"Unidad de aprendizaje 1"},{"id":"UA2","n":"Unidad de aprendizaje 2"},{"id":"UA3","n":"Unidad de aprendizaje 3"}],"ruta":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/03GMAR_ESTADISTICA"},{"c":"02GMAR","n":"Comunicación Empresarial","k":"COM","ses":11,"temas":[{"id":"T01","n":"Tema 1: Introducción a la dirección de la comunicación"},{"id":"T02","n":"Tema 2: Ética, cultura y valores"},{"id":"T03","n":"Tema 3: Comunicación interna"},{"id":"T04","n":"Tema 4: Comunicación externa"},{"id":"T05","n":"Tema 5: Grupos de presión y comunicación de crisis"},{"id":"T06","n":"Tema 6: Comunicación empresarial 2.0"},{"id":"T07","n":"Tema 7: Redes sociales"},{"id":"T08","n":"Tema 8: Publicidad en internet"}],"ruta":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/02GMAR_COMUNICACION"},{"c":"01GMAR","n":"Contabilidad Analítica y de Costes","k":"CON","ses":17,"temas":[{"id":"T01","n":"Tema 1: Introducción financiera y contable"},{"id":"T02","n":"Tema 2: La cuenta de resultados y el fondo de maniobra"},{"id":"T03","n":"Tema 3: Ratios económico-financieros"},{"id":"T04","n":"Tema 4: Introducción a la estabilidad de costes"},{"id":"T05","n":"Tema 5: La magnitud del coste"},{"id":"T06","n":"Tema 6: Análisis de los factores de producción y cálculo de sus costes"},{"id":"T07","n":"Tema 7: Análisis del proceso productivo para la determinación del coste"},{"id":"T08","n":"Tema 8: Modelos basados en la localización e imputación de los costes"},{"id":"T09","n":"Tema 9: Casos particulares en la determinación del coste de producción"},{"id":"T10","n":"Tema 10: Análisis de la variabilidad de los costes. Modelo de imputación racional"},{"id":"T11","n":"Tema 11 (no aparece en el calendario de sesiones; título por confirmar)"}],"ruta":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/01GMAR_CONTABILIDAD"}],"ev":[{"f":"2026-10-13","h":"20:00","a":"02GMAR","s":"Tutoría inicial","d":"Tutoría colectiva de presentación","he":"22:00","t":"tutoria","e":"of"},{"f":"2026-10-14","h":"18:00","a":"01GMAR","s":"Tutoría inicial","d":"Tutoría colectiva de presentación","he":"20:00","t":"tutoria","e":"of"},{"f":"2026-10-15","h":"20:00","a":"03GMAR","s":"Tutoría inicial","d":"Tutoría colectiva de presentación","he":"22:00","t":"tutoria","e":"of"},{"f":"2026-10-16","h":"18:00","a":"01GMAR","s":"Sesión 1","d":"Tema 1: Introducción financiera y contable (1.ª parte). Sesión teórica","he":"20:00","t":"clase","e":"of"},{"f":"2026-10-16","h":"20:00","a":"03GMAR","s":"Sesión 1","d":"UA 1: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-10-19","h":"18:00","a":"02GMAR","s":"Sesión 1","d":"Tema 1: Introducción a la dirección de la comunicación. Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-10-20","h":"18:00","a":"04GMAR","s":"Tutoría inicial","d":"Tutoría colectiva de presentación","he":"20:00","t":"tutoria","e":"of"},{"f":"2026-10-20","h":"20:00","a":"02GMAR","s":"Sesión 2","d":"Tema 2: Ética, cultura y valores. Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-10-21","h":"18:00","a":"01GMAR","s":"Sesión 2","d":"Tema 1: Introducción financiera y contable (2.ª parte). Sesión teórica","he":"20:00","t":"clase","e":"of"},{"f":"2026-10-22","h":"20:00","a":"03GMAR","s":"Sesión 2","d":"UA 1: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-10-23","h":"20:00","a":"03GMAR","s":"Sesión 3","d":"UA 1: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-10-26","h":"18:00","a":"02GMAR","s":"Sesión 3","d":"Tema 3: Comunicación interna. Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-10-27","h":"18:00","a":"04GMAR","s":"Sesión 1","d":"Clase teórica: Tema 1","he":"20:00","t":"clase","e":"of"},{"f":"2026-10-27","h":"20:00","a":"02GMAR","s":"Sesión 4","d":"Tema 4: Comunicación externa. Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-10-28","h":"18:00","a":"01GMAR","s":"Sesión 3","d":"Tema 2: La cuenta de resultados y el fondo de maniobra (1.ª parte)","he":"20:00","t":"clase","e":"of"},{"f":"2026-10-29","h":"20:00","a":"03GMAR","s":"Sesión 4","d":"UA 1: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-10-30","h":"18:00","a":"01GMAR","s":"Sesión 4","d":"Tema 2: La cuenta de resultados y el fondo de maniobra (2.ª parte)","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-02","h":"18:00","a":"02GMAR","s":"Sesión 5","d":"Sesión práctica: comunicación interna y externa","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-03","h":"18:00","a":"04GMAR","s":"Sesión 2","d":"Clase teórico-práctica: Tema 1","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-04","h":"18:00","a":"01GMAR","s":"Sesión 5","d":"Tema 3: Ratios económico-financieros (1.ª parte). Sesión teórica","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-05","h":"20:00","a":"03GMAR","s":"Sesión 5","d":"UA 1: Sesión práctica","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-11-05","h":"20:00","a":"04GMAR","s":"Sesión 3","d":"Clase teórico-práctica: Tema 2","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-11-06","h":"18:00","a":"01GMAR","s":"Sesión 6","d":"Tema 3: Ratios económico-financieros (2.ª parte). Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-09","h":"18:00","a":"02GMAR","s":"Sesión 6","d":"Tema 5: Grupos de presión y comunicación de crisis. Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-10","h":"18:00","a":"04GMAR","s":"Sesión 4","d":"Clase teórico-práctica: Tema 2","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-11","h":"18:00","a":"01GMAR","s":"Sesión 7","d":"Sesión práctica para la realización de la actividad 1","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-12","h":"20:00","a":"03GMAR","s":"Sesión 6","d":"UA 2: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-11-13","h":"18:00","a":"01GMAR","s":"Sesión 8","d":"Tema 4: Introducción a la estabilidad de costes. Sesión teórica","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-13","h":"20:00","a":"03GMAR","s":"Sesión 7","d":"UA 2: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-11-16","h":"18:00","a":"02GMAR","s":"Sesión 7","d":"Tema 6: Comunicación empresarial 2.0 (1.ª parte). Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-17","h":"18:00","a":"04GMAR","s":"Sesión 5","d":"Clase teórica: Tema 3","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-18","h":"18:00","a":"01GMAR","s":"Sesión 9","d":"Tema 5: La magnitud del coste. Sesión teórica","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-19","h":"20:00","a":"03GMAR","s":"Sesión 8","d":"UA 2: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-11-19","h":"20:00","a":"04GMAR","s":"Sesión 6","d":"Clase teórica y práctica: Tema 3","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-11-20","h":"18:00","a":"01GMAR","s":"Sesión 10","d":"Tema 6: Análisis de los factores de producción y cálculo de sus costes","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-23","h":"18:00","a":"02GMAR","s":"Sesión 8","d":"Tema 6: Comunicación empresarial 2.0 (2.ª parte). Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-24","h":"18:00","a":"04GMAR","s":"Sesión 7","d":"Clase teórica: Tema 4","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-25","h":"18:00","a":"01GMAR","s":"Sesión 11","d":"Tema 7: Análisis del proceso productivo para la determinación del coste","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-26","h":"20:00","a":"03GMAR","s":"Sesión 9","d":"UA 2: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-11-27","h":"20:00","a":"03GMAR","s":"Sesión 10","d":"UA 2: Sesión práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-11-30","h":"18:00","a":"02GMAR","s":"Sesión 9","d":"Sesión práctica: comunicación empresarial 2.0","he":"20:00","t":"clase","e":"of"},{"f":"2026-11-30","h":"23:59","a":"02GMAR","s":"Entrega recomendada – Evidencia 1","d":"Estudio del caso 1; actividad-resumen de temas 1–4","t":"entrega","e":"rec"},{"f":"2026-11-30","h":"23:59","a":"01GMAR","s":"Entrega recomendada – Actividad 1","d":"Diagnóstico económico-financiero de una empresa","t":"entrega","e":"rec"},{"f":"2026-12-01","h":"20:00","a":"04GMAR","s":"Sesión 8","d":"Clase teórica y práctica: Tema 4","he":"22:00","t":"clase","e":"of"},{"f":"2026-12-02","h":"18:00","a":"01GMAR","s":"Sesión 12","d":"Tema 8: Modelos basados en la localización e imputación de los costes","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-03","h":"20:00","a":"03GMAR","s":"Sesión 11","d":"UA 3: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-12-03","h":"20:00","a":"04GMAR","s":"Sesión 9","d":"Clase teórica: Temas 5–7","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-12-04","h":"18:00","a":"01GMAR","s":"Sesión 13","d":"Sesión práctica para la realización de la actividad 2","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-04","h":"23:59","a":"04GMAR","s":"Entrega recomendada – Evidencia 1","d":"Ejercicios de los temas 1–4","t":"entrega","e":"rec"},{"f":"2026-12-07","h":"18:00","a":"02GMAR","s":"Sesión 10","d":"Tema 7: Redes sociales. Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-09","h":"18:00","a":"01GMAR","s":"Sesión 14","d":"Tema 9: Casos particulares en la determinación del coste de producción","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-10","h":"20:00","a":"03GMAR","s":"Sesión 12","d":"UA 3: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-12-11","h":"18:00","a":"01GMAR","s":"Sesión 15","d":"Tema 10: Análisis de la variabilidad de los costes. Modelo de imputación racional","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-11","h":"20:00","a":"03GMAR","s":"Sesión 13","d":"UA 3: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-12-14","h":"18:00","a":"02GMAR","s":"Sesión 11","d":"Tema 8: Publicidad en internet. Sesión teórico-práctica","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-15","h":"18:00","a":"04GMAR","s":"Sesión 10","d":"Clase teórico-práctica: Temas 5–7","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-16","h":"18:00","a":"01GMAR","s":"Sesión 16","d":"Repaso de la primera parte del curso (temas 1–3)","he":"20:00","t":"clase","e":"of"},{"f":"2026-12-17","h":"20:00","a":"03GMAR","s":"Sesión 14","d":"UA 3: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-12-17","h":"20:00","a":"04GMAR","s":"Sesión 11","d":"Clase teórica: Tema 8","he":"22:00","t":"clase","e":"of","w":1},{"f":"2026-12-18","h":"20:00","a":"03GMAR","s":"Sesión 15","d":"UA 3: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2026-12-18","h":"23:59","a":"04GMAR","s":"Entrega recomendada – Evidencia 2","d":"Ejercicios de los temas 5–8","t":"entrega","e":"rec"},{"f":"2026-12-20","h":"23:59","a":"02GMAR","s":"Entrega recomendada – Evidencia 2","d":"Estudio del caso 2; resumen de temas 5–7","t":"entrega","e":"rec"},{"f":"2027-01-07","h":"20:00","a":"03GMAR","s":"Sesión 16","d":"UA 3: Sesión teórico-práctica","he":"22:00","t":"clase","e":"of"},{"f":"2027-01-08","h":"18:00","a":"01GMAR","s":"Sesión 17","d":"Repaso de la segunda parte del curso (temas 4–10)","he":"20:00","t":"clase","e":"of"},{"f":"2027-01-08","h":"23:59","a":"04GMAR","s":"Entrega portafolio (1.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":1},{"f":"2027-01-11","h":"18:00","a":"02GMAR","s":"Tutoría final","d":"Tutoría colectiva de recapitulación","he":"20:00","t":"tutoria","e":"of"},{"f":"2027-01-12","h":"18:00","a":"04GMAR","s":"Tutoría final","d":"Tutoría colectiva de recapitulación","he":"20:00","t":"tutoria","e":"of"},{"f":"2027-01-12","h":"23:59","a":"02GMAR","s":"Entrega portafolio (1.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":1},{"f":"2027-01-13","h":"18:00","a":"01GMAR","s":"Tutoría final","d":"Tutoría colectiva de recapitulación","he":"20:00","t":"tutoria","e":"of"},{"f":"2027-01-14","h":"20:00","a":"03GMAR","s":"Sesión 17","d":"UA 3: Sesión práctica","he":"22:00","t":"clase","e":"of"},{"f":"2027-01-15","h":"20:00","a":"03GMAR","s":"Tutoría final","d":"Tutoría colectiva de recapitulación","he":"22:00","t":"tutoria","e":"of"},{"f":"2027-01-15","h":"23:59","a":"01GMAR","s":"Entrega recomendada – Actividad 2","d":"Clasificación de costes","t":"entrega","e":"rec"},{"f":"2027-01-25","h":"18:00","a":"02GMAR","s":"Examen (1.ª convocatoria)","d":"Prueba final","he":"22:00","t":"examen","e":"of","c":1},{"f":"2027-01-25","h":"23:59","a":"03GMAR","s":"Entrega portafolio (1.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":1},{"f":"2027-01-27","h":"18:00","a":"04GMAR","s":"Examen (1.ª convocatoria)","d":"Examen","he":"22:00","t":"examen","e":"of","c":1},{"f":"2027-01-29","h":"18:00","a":"03GMAR","s":"Examen (1.ª convocatoria)","d":"Examen","he":"22:00","t":"examen","e":"of","c":1},{"f":"2027-02-02","h":"18:00","a":"01GMAR","s":"Examen (1.ª convocatoria)","d":"Examen","he":"22:00","t":"examen","e":"of","c":1},{"f":"2027-02-02","h":"23:59","a":"01GMAR","s":"Entrega portafolio (1.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":1},{"f":"2027-05-18","h":"23:59","a":"02GMAR","s":"Entrega portafolio (2.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":2},{"f":"2027-05-21","h":"23:59","a":"04GMAR","s":"Entrega portafolio (2.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":2},{"f":"2027-05-31","h":"18:00","a":"02GMAR","s":"Examen (2.ª convocatoria)","d":"Prueba final","he":"22:00","t":"examen","e":"of","c":2},{"f":"2027-05-31","h":"23:59","a":"03GMAR","s":"Entrega portafolio (2.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":2},{"f":"2027-06-02","h":"18:00","a":"04GMAR","s":"Examen (2.ª convocatoria)","d":"Examen","he":"22:00","t":"examen","e":"of","c":2},{"f":"2027-06-04","h":"18:00","a":"03GMAR","s":"Examen (2.ª convocatoria)","d":"Examen","he":"22:00","t":"examen","e":"of","c":2},{"f":"2027-06-08","h":"18:00","a":"01GMAR","s":"Examen (2.ª convocatoria)","d":"Examen","he":"22:00","t":"examen","e":"of","c":2},{"f":"2027-06-08","h":"23:59","a":"01GMAR","s":"Entrega portafolio (2.ª convocatoria)","d":"Fecha límite de entrega del portafolio","t":"entrega","e":"of","c":2}],"tareas":[{"id":"t01","a":"04GMAR","n":"Evidencia 1 (T1–4)","p":"30 %","f":"2026-12-04","e":"rec","det":"Ejercicios de los temas 1–4"},{"id":"t02","a":"04GMAR","n":"Evidencia 2 (T5–8)","p":"30 %","f":"2026-12-18","e":"rec","det":"Ejercicios de los temas 5–8"},{"id":"t03","a":"03GMAR","n":"Evidencia 1","p":"20 %","f":"","det":""},{"id":"t04","a":"03GMAR","n":"Evidencia 2","p":"20 %","f":"","det":""},{"id":"t05","a":"03GMAR","n":"Evidencia 3","p":"20 %","f":"","det":""},{"id":"t06","a":"02GMAR","n":"Informe 1 / Evidencia 1","p":"20 %","f":"2026-11-30","e":"rec","det":"Estudio del caso 1; actividad-resumen de temas 1–4"},{"id":"t07","a":"02GMAR","n":"Informe 2 / Evidencia 2","p":"20 %","f":"2026-12-20","e":"rec","det":"Estudio del caso 2; resumen de temas 5–7"},{"id":"t08","a":"02GMAR","n":"Foro","p":"10 %","f":"","det":""},{"id":"t09","a":"01GMAR","n":"Actividad 1","p":"30 %","f":"2026-11-30","e":"rec","det":"Diagnóstico económico-financiero de una empresa"},{"id":"t10","a":"01GMAR","n":"Actividad 2","p":"20 %","f":"2027-01-15","e":"rec","det":"Clasificación de costes"}],"docs":[{"a":"04GMAR","n":"Guía Docente Introducción a la Eco 26-27.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/04GMAR_ECONOMIA/00_guias","nota":"Copia el original a esta carpeta y marca la casilla.","link":"","id":"d01"},{"a":"04GMAR","n":"Guía_Introducción a la economía.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/04GMAR_ECONOMIA/00_guias","nota":"Copia el original a esta carpeta y marca la casilla.","link":"","id":"d02"},{"a":"04GMAR","n":"Introducción a la economía.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/04GMAR_ECONOMIA/01_material_oficial","nota":"Manual/temario; confirmar. Copia el original a esta carpeta y marca la casilla.","link":"","id":"d03"},{"a":"04GMAR","n":"criterios_evaluacion_actividad.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/04GMAR_ECONOMIA/03_evaluacion/rubricas","nota":"Copia el original a esta carpeta y marca la casilla.","link":"","id":"d04"},{"a":"04GMAR","n":"Introduccion_Economia_VIU_guia_Cgpt.pdf","o":"IA","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/04GMAR_ECONOMIA/04_material_IA_no_oficial","nota":"NO OFICIAL: contrastar siempre con el material oficial.","link":"","id":"d05"},{"a":"03GMAR","n":"Guía Docente_03GMAR_26-27(1).pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/03GMAR_ESTADISTICA/00_guias","nota":"Copia el original a esta carpeta y marca la casilla.","link":"","id":"d06"},{"a":"03GMAR","n":"03GMAR_Estadística aplicada al marketing.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/03GMAR_ESTADISTICA/01_material_oficial","nota":"Manual; confirmar. Copia el original a esta carpeta y marca la casilla.","link":"","id":"d07"},{"a":"03GMAR","n":"Manual_Estadistica_Aplicada_al_Marketing-Cgpt.pdf","o":"IA","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/03GMAR_ESTADISTICA/04_material_IA_no_oficial","nota":"NO OFICIAL: contrastar siempre con el material oficial.","link":"","id":"d08"},{"a":"02GMAR","n":"Manual Comunicación Empresarial - U1-U2-U3.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/02GMAR_COMUNICACION/01_material_oficial","nota":"Copia el original a esta carpeta y marca la casilla.","link":"","id":"d09"},{"a":"02GMAR","n":"PresentaciónTUTORÍAINICIAL.ComunicaciónEmpresarial13.10.2026.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/02GMAR_COMUNICACION/00_guias","nota":"La guía docente de esta asignatura no está identificada con certeza (ver Dudas). Copia el original a esta carpeta y marca la casilla.","link":"","id":"d10"},{"a":"02GMAR","n":"Presentacion caso practico.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/02GMAR_COMUNICACION/05_casos_practicos","nota":"Copia el original a esta carpeta y marca la casilla.","link":"","id":"d11"},{"a":"02GMAR","n":"solucion caso practico.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/02GMAR_COMUNICACION/05_casos_practicos","nota":"Copia el original a esta carpeta y marca la casilla.","link":"","id":"d12"},{"a":"02GMAR","n":"Guia_Comunicacion_Empresarial_VIU-Cgpt.pdf","o":"IA","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/02GMAR_COMUNICACION/04_material_IA_no_oficial","nota":"NO OFICIAL: contrastar siempre con el material oficial.","link":"","id":"d13"},{"a":"01GMAR","n":"GUIA DOCENTE.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/01GMAR_CONTABILIDAD/00_guias","nota":"Confirmar que corresponde a esta asignatura. Copia el original a esta carpeta y marca la casilla.","link":"","id":"d14"},{"a":"01GMAR","n":"GUIA DE LA ASIGNATURA.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/01GMAR_CONTABILIDAD/00_guias","nota":"Confirmar que corresponde a esta asignatura. Copia el original a esta carpeta y marca la casilla.","link":"","id":"d15"},{"a":"01GMAR","n":"contabilidad analítica y de costes.pdf","o":"OF","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/01GMAR_CONTABILIDAD/01_material_oficial","nota":"Manual; confirmar. Copia el original a esta carpeta y marca la casilla.","link":"","id":"d16"},{"a":"01GMAR","n":"Guia_Contabilidad_Analitica_y_de_Costes_Cgpt.pdf","o":"IA","dest":"01_CURSO_1_2026-27/C1_CUATRIMESTRE_1/01GMAR_CONTABILIDAD/04_material_IA_no_oficial","nota":"NO OFICIAL: contrastar siempre con el material oficial.","link":"","id":"d17"},{"a":"","n":"VIU_Normativa_Guia_uso_IA_estudiantes_v02.pdf (Guía de uso de IA para estudiantes)","o":"OF","dest":"90_COMUN/normativa","nota":"Ya está en tu carpeta. Tenías 3 copias idénticas: conserva una y mueve las otras a 99_ARCHIVO_Y_COPIAS/duplicados_descartados.","link":"../90_COMUN/normativa/VIU_Normativa_Guia_uso_IA_estudiantes_v02.pdf","id":"d18"},{"a":"","n":"Cómo citar el uso de IA en trabajos académicos.pdf","o":"OF","dest":"90_COMUN/normativa","nota":"Tenías 3 copias: conserva una y mueve las otras a 99_ARCHIVO_Y_COPIAS/duplicados_descartados. Copia el original a esta carpeta y marca la casilla.","link":"","id":"d19"},{"a":"","n":"Calendario_Marketing_VIU_2026-2027.xlsx","o":"EL","dest":"00_PANEL_Y_CONTROL","nota":"Transcrito de las guías docentes; no es un documento oficial de VIU. Ya está en tu carpeta.","link":"","id":"d20"}],"dudas":[],"avisos":["Contabilidad, 02/02/2027: el portafolio (23:59) y el examen (18–22 h) caen el mismo día.","Comunicación y Estadística, 25/01/2027: examen de Comunicación (18–22 h) y portafolio de Estadística (23:59) el mismo día.","Estadística, 31/05/2027: el portafolio (23:59) cae el mismo día que el examen de Comunicación (2.ª convocatoria).","Economía y Estadística: posibles solapes de sesiones (20–22 h) el 05/11, 19/11, 03/12 y 17/12. Por confirmar en el campus.","Las entregas «recomendadas» no son fechas límite. Reglas comunes (tus notas): mínimo 5 en portafolio y en examen; las entregas fuera de plazo no se corrigen; plagio = 0."]};
+/* ===== FIN DE DATOS ===== */
+const K='viu_campus_v1',COL={'04GMAR':'#c0262d','03GMAR':'#4f545c','02GMAR':'#8a2a30','01GMAR':'#7b766d'};
+const TIPO={clase:'Clase',tutoria:'Tutoría',entrega:'Entrega',examen:'Examen'};
+const EST={of:'Oficial (guía docente)',rec:'Recomendada',pc:'Por confirmar'};
+const PK=[['l','Leído'],['a','Apuntes'],['e','Ejercicios'],['t','Test']];
+const A=Object.fromEntries(D.asig.map(a=>[a.c,a]));
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pd=s=>{const[a,b,c]=s.split('-');return new Date(+a,b-1,+c)};
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const fl=s=>pd(s).toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const fc=s=>pd(s).toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+const hoy=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+const dias=s=>Math.round((pd(s)-hoy())/864e5);
+const rel=n=>n===0?'hoy':n===1?'mañana':n<0?'hace '+(-n)+' días':'en '+n+' días';
+const hr=e=>e.he?e.h+'–'+e.he:e.h==='23:59'?'hasta las 23:59':e.h;
+const evEnd=e=>{const[h,m]=(e.he||e.h).split(':'),d=pd(e.f);d.setHours(+h,+m,0,0);return d};
+const EV=D.ev.slice().sort((a,b)=>(a.f+a.h).localeCompare(b.f+b.h));
+const tag=a=>A[a]?`<span class="tag" style="--c:${COL[a]}">${A[a].k}</span>`:'<span class="tag" style="--c:#5b6676">GEN</span>';
+const opts=(l,v)=>l.map(([x,t])=>`<option value="${esc(x)}"${x===v?' selected':''}>${esc(t)}</option>`).join('');
+const OA=[['','Todas las asignaturas']].concat(D.asig.map(a=>[a.c,a.n]));
+
+let S={};
+let norm=()=>{['t','ia','p','d','q'].forEach(k=>S[k]=S[k]||{});S.c=S.c||[]};norm();
+const pct=a=>{let n=0,t=0;a.temas.forEach(x=>{const p=(S.p[a.c]||{})[x.id]||{};PK.forEach(([k])=>{t++;if(p[k])n++})});return t?Math.round(100*n/t):0};
+const tpct=(a,x)=>{const p=(S.p[a.c]||{})[x.id]||{};return PK.filter(([k])=>p[k]).length*25};
+
+const ui={asig:null},t0=new Date(),cal={y:t0.getFullYear(),m:t0.getMonth(),a:'',t:'',sel:null},lib={a:'',o:'',q:''};
+
+const evRow=e=>`<div class="ev" style="--c:${COL[e.a]}"><div class="when"><b>${fc(e.f)}</b><br>${hr(e)}</div><div><b>${esc(A[e.a].n)}</b> · ${TIPO[e.t]}${e.c?' · '+e.c+'.ª convocatoria':''}<br>${esc(e.s)}${e.d?' — '+esc(e.d):''}<br><span class="badge b-${e.e}">${EST[e.e]}</span>${e.w?' <span class="badge b-pc">Posible solape: por confirmar</span>':''}</div></div>`;
+const chip=e=>`<span class="chip" style="--c:${COL[e.a]}" title="${esc(A[e.a].n+' · '+e.s)}">${e.w?'⚠ ':''}${e.h} ${A[e.a].k}</span>`;
+const barra=a=>`<div style="--c:${COL[a.c]};margin:10px 0"><div style="display:flex;justify-content:space-between"><span>${esc(a.n)}</span><b>${pct(a)} %</b></div><div class="bar"><i style="width:${pct(a)}%"></i></div></div>`;
+
+const V={};
+Object.assign(COL,{'04GMAR':'#c0262d','03GMAR':'#4f545c','02GMAR':'#8a2a30','01GMAR':'#7b766d'});
+const ART={
+'04GMAR':'<g fill="rgba(255,255,255,.12)"><rect x="40" y="90" width="34" height="60"/><rect x="100" y="72" width="34" height="78"/><rect x="160" y="80" width="34" height="70"/><rect x="220" y="52" width="34" height="98"/><rect x="280" y="36" width="34" height="114"/></g><polyline points="30,104 100,84 170,92 240,56 310,38 380,16" fill="none" stroke="#e0454b" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>',
+'03GMAR':'<path d="M0 150C90 150 120 28 200 28S310 150 400 150" fill="rgba(255,255,255,.1)" stroke="#e0454b" stroke-width="3"/><g fill="rgba(255,255,255,.55)"><circle cx="60" cy="120" r="3"/><circle cx="110" cy="96" r="3"/><circle cx="150" cy="70" r="3"/><circle cx="215" cy="50" r="3"/><circle cx="265" cy="84" r="3"/><circle cx="330" cy="116" r="3"/></g>',
+'02GMAR':'<g fill="none" stroke="rgba(255,255,255,.22)" stroke-width="2"><circle cx="320" cy="60" r="24"/><circle cx="320" cy="60" r="50"/><circle cx="320" cy="60" r="78"/></g><rect x="40" y="30" width="130" height="38" rx="10" fill="rgba(255,255,255,.14)"/><rect x="90" y="80" width="150" height="38" rx="10" fill="#e0454b" opacity=".85"/>',
+'01GMAR':'<g stroke="rgba(255,255,255,.16)" stroke-width="2"><path d="M0 30H400M0 60H400M0 90H400M0 120H400"/><path d="M80 0V150M200 0V150M300 0V150"/></g><g fill="#e0454b"><rect x="92" y="96" width="46" height="8" rx="2"/><rect x="212" y="66" width="62" height="8" rx="2"/><rect x="312" y="36" width="50" height="8" rx="2"/></g>'};
+const cover=(c,k,big)=>`<div class="cov${big?' big':''}" role="img" aria-label="Portada de ${esc(A[c]?A[c].n:'')}"><svg viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${ART[c]||''}</svg><span>${esc(k||'')}</span></div>`;
+
+V.inicio=()=>{
+ const ah=new Date(),pr=EV.filter(e=>evEnd(e)>=ah),s=pr[0];
+ const sem=pr.filter(e=>dias(e.f)<=7),ent=pr.filter(e=>e.t==='entrega'||e.t==='examen').slice(0,6);
+ const ex=pr.find(e=>e.t==='examen'&&e.c===1);
+ const pend=D.tareas.concat(S.c).filter(t=>!(S.t[t.id]>=2)).length;
+ return `<h1>Inicio</h1><p class="mut">${ah.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${esc(D.curso)}</p>
+ ${s?`<section class="hero" style="--c:${COL[s.a]}"><div class="mut">Lo siguiente en tu agenda · ${rel(dias(s.f))}</div><div class="big">${esc(A[s.a].n)}</div><div>${TIPO[s.t]}: ${esc(s.s)} · ${fl(s.f)}, ${hr(s)}</div>${s.d?`<div class="mut">${esc(s.d)}</div>`:''}</section>`:'<section class="hero" style="--c:var(--acc)"><div class="big">No quedan eventos en el calendario cargado</div></section>'}
+ <div class="grid">
+ <div class="card"><h2>Próximos 7 días</h2>${sem.map(evRow).join('')||'<p class="mut">Nada programado.</p>'}</div>
+ <div class="card"><h2>Próximas entregas y exámenes</h2>${ent.map(evRow).join('')||'<p class="mut">Nada pendiente.</p>'}${ex?`<p class="mut">Primer examen de 1.ª convocatoria: ${fc(ex.f)} (${rel(dias(ex.f))}).</p>`:''}</div>
+ <div class="card"><h2>Progreso</h2>${D.asig.map(barra).join('')}<p class="mut">Tareas sin terminar: ${pend}</p></div>
+ <div class="card"><h2>A tener en cuenta</h2><ul>${D.avisos.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>`;
+};
+
+V.asignaturas=()=>{
+ if(ui.asig){
+  const a=A[ui.asig],ev=EV.filter(e=>e.a===a.c&&(e.t==='tutoria'||e.t==='examen'||(e.t==='entrega'&&e.e==='of')));
+  const ts=D.tareas.filter(t=>t.a===a.c);
+  return `<button class="btn" data-act="asig" data-v="">← Todas las asignaturas</button>
+  <div style="margin-top:14px">${cover(a.c,a.k,1)}</div><h1 style="margin-top:14px"><span class="tag" style="--c:${COL[a.c]}">${a.k}</span> ${esc(a.n)}</h1>
+  <p class="mut">Código ${a.c} · ${a.ses} sesiones síncronas${isAdm?' · Carpeta: <code>'+esc(a.ruta.replace(/\//g,'\\'))+'</code>':''}</p>
+  <div class="bar-top"><button class="btn" data-act="verCal" data-v="${a.c}">Ver en el calendario</button></div>
+  <div class="grid">
+  <div class="card"><h2>Temas (${pct(a)} % completado)</h2><div class="sc"><table>${a.temas.map(x=>`<tr><td>${esc(x.n)}</td><td>${tpct(a,x)} %</td></tr>`).join('')}</table></div></div>
+  <div class="card"><h2>Entregas y pesos</h2>${ts.map(t=>`<p style="margin:6px 0"><b>${esc(t.n)}</b> · ${esc(t.p)}<br><span class="mut">${t.f?fc(t.f)+' (recomendada)':'Fecha por confirmar'}${t.det?' · '+esc(t.det):''}</span></p>`).join('')}<p class="mut">Pesos según tus notas; confírmalos en la guía docente.</p></div>
+  <div class="card"><h2>Tutorías, portafolio y exámenes</h2>${ev.map(evRow).join('')}</div>
+  </div>`;
+ }
+ return `<h1>Asignaturas</h1><p class="mut">${esc(D.curso)}</p><div class="grid">${D.asig.map(a=>{
+  const n=EV.find(e=>e.a===a.c&&evEnd(e)>=new Date());
+  return `<div class="card asig" style="--c:${COL[a.c]}">${cover(a.c,a.k)}<h2 style="margin-top:12px">${esc(a.n)}</h2><p class="mut">${a.c} · ${a.ses} sesiones síncronas · ${a.temas.length} ${a.c==='03GMAR'?'unidades':'temas'}</p>${barra(a)}<p style="margin:8px 0">${n?`Siguiente: ${fc(n.f)} · ${esc(n.s)}`:'Sin eventos próximos'}</p><button class="btn" data-act="asig" data-v="${a.c}">Abrir asignatura</button></div>`}).join('')}</div>`;
+};
+
+V.calendario=()=>{
+ const first=new Date(cal.y,cal.m,1),off=(first.getDay()+6)%7,dim=new Date(cal.y,cal.m+1,0).getDate(),pre=cal.y+'-'+String(cal.m+1).padStart(2,'0');
+ const evs=EV.filter(e=>(!cal.a||e.a===cal.a)&&(!cal.t||e.t===cal.t)),by={};
+ evs.forEach(e=>(by[e.f]=by[e.f]||[]).push(e));
+ let c='';for(let i=0;i<off;i++)c+='<div class="off"></div>';
+ for(let d=1;d<=dim;d++){const k=pre+'-'+String(d).padStart(2,'0'),l=by[k]||[];
+  c+=`<div class="day${k===iso(hoy())?' today':''}${k===cal.sel?' sel':''}" data-act="dia" data-v="${k}"><span class="n">${d}</span>${l.slice(0,3).map(chip).join('')}${l.length>3?`<span class="more">+${l.length-3} más</span>`:''}</div>`}
+ const lista=cal.sel?(by[cal.sel]||[]):evs.filter(e=>e.f.startsWith(pre));
+ const sinf=D.tareas.filter(t=>!t.f&&(!cal.a||t.a===cal.a));
+ return `<h1>Calendario</h1>
+ <p class="mut">Fechas transcritas de las guías docentes (Calendario_Marketing_VIU_2026-2027.xlsx). No es un documento oficial: verifica siempre en el campus.</p>
+ <div class="bar-top"><button class="btn" data-act="mes" data-v="-1" aria-label="Mes anterior">‹</button><h2 style="margin:0;min-width:11ch;text-align:center">${first.toLocaleDateString('es-ES',{month:'long',year:'numeric'})}</h2><button class="btn" data-act="mes" data-v="1" aria-label="Mes siguiente">›</button><button class="btn" data-act="hoy">Hoy</button>
+ <select data-ch="calA" aria-label="Asignatura">${opts(OA,cal.a)}</select><select data-ch="calT" aria-label="Tipo">${opts([['','Todos los tipos'],['clase','Clases'],['tutoria','Tutorías'],['entrega','Entregas'],['examen','Exámenes']],cal.t)}</select></div>
+ <p><span class="badge b-of">Oficial (guía docente)</span> <span class="badge b-rec">Recomendada</span> <span class="badge b-pc">Por confirmar</span> · ⚠ posible solape</p>
+ <div class="cal">${['L','M','X','J','V','S','D'].map(x=>`<div class="hd">${x}</div>`).join('')}${c}</div>
+ <div class="card" style="margin-top:16px"><h2>${cal.sel?fl(cal.sel):'Eventos del mes'}</h2>${lista.map(evRow).join('')||'<p class="mut">Sin eventos.</p>'}</div>
+ <div class="card" style="margin-top:16px"><h2>Fechas por confirmar en el campus</h2><ul>${sinf.map(t=>`<li>${tag(t.a)} ${esc(t.n)} (${esc(t.p)})</li>`).join('')}<li>Economía y Estadística: sesiones de 20–22 h que coinciden el 05/11, 19/11, 03/12 y 17/12.</li><li>Economía: el formato del examen se concretará en la tutoría final.</li></ul></div>`;
+};
+
+V.tareas=()=>{
+ const all=D.tareas.concat(S.c).sort((x,y)=>(x.f||'9').localeCompare(y.f||'9')),n=[0,0,0];
+ all.forEach(t=>n[S.t[t.id]||0]++);
+ return `<h1>Tareas y entregas</h1><p class="mut">Pendientes ${n[0]} · En curso ${n[1]} · Hechas ${n[2]}. Pulsa el estado para cambiarlo. Pesos según tus notas (tareas_y_entregas.md): confírmalos en la guía docente.</p>
+ <div class="card sc"><table><tr><th>Asig.</th><th>Entrega</th><th>Peso</th><th>Fecha</th><th>Estado</th><th>IA declarada</th><th></th></tr>
+ ${all.map(t=>`<tr><td>${tag(t.a)}</td><td>${esc(t.n)}${t.det?`<br><span class="mut">${esc(t.det)}</span>`:''}</td><td>${esc(t.p||'—')}</td><td>${t.f?fc(t.f)+(t.e?' <span class="badge b-'+t.e+'">'+EST[t.e]+'</span>':''):t.custom?'—':'<span class="badge b-pc">Por confirmar</span>'}</td><td><button class="btn" data-act="est" data-v="${t.id}">${['Pendiente','En curso','Hecha'][S.t[t.id]||0]}</button></td><td><input type="checkbox" data-ch="ia" data-v="${t.id}"${S.ia[t.id]?' checked':''} aria-label="Declaración de uso de IA hecha"></td><td>${t.custom?`<button class="btn" data-act="borrar" data-v="${t.id}">Borrar</button>`:''}</td></tr>`).join('')}</table></div>
+ <div class="card" style="margin-top:16px"><h2>Añadir tarea propia</h2><div class="bar-top"><input id="nt-n" placeholder="Qué tienes que hacer" size="30"><select id="nt-a">${opts([['','General']].concat(D.asig.map(a=>[a.c,a.n])),'')}</select><input id="nt-f" type="date" aria-label="Fecha"><button class="btn" data-act="nueva">Añadir</button></div></div>`;
+};
+
+const origen={OF:['Oficial VIU','of'],IA:['IA · no oficial','pc'],EL:['Elaborado · no oficial','el']};
+const libList=()=>{const q=lib.q.toLowerCase(),l=D.docs.filter(d=>(!lib.a||d.a===lib.a)&&(!lib.o||d.o===lib.o)&&(!q||(d.n+' '+d.dest).toLowerCase().includes(q)));
+ return `<p class="mut">${l.length} documentos</p><div class="card sc"><table><tr><th>Documento</th><th>Origen</th>${isAdm?'<th>Carpeta de destino</th><th>Copiado</th>':''}</tr>${l.map(d=>{const r=d.dest.replace(/\//g,'\\');
+ return `<tr><td>${d.a?tag(d.a)+' ':''}${d.link&&/^https?:\/\//i.test(d.link)?`<a href="${esc(d.link)}" target="_blank" rel="noopener">${esc(d.n)}</a>`:esc(d.n)}${d.nota&&isAdm?`<br><span class="mut">${esc(d.nota)}</span>`:''}</td><td><span class="badge b-${origen[d.o][1]}">${origen[d.o][0]}</span></td>${isAdm?`<td><code>${esc(r)}</code><br><button class="btn" data-act="ruta" data-v="${esc(r)}">Copiar ruta</button></td><td><input type="checkbox" data-ch="doc" data-v="${d.id}"${S.d[d.id]?' checked':''} aria-label="Copiado a su carpeta"></td>`:''}</tr>`}).join('')}</table></div>`};
+V.biblioteca=()=>`<h1>Biblioteca documental</h1><p class="mut">Documentos de apoyo del grado. Los oficiales de VIU y los generados con IA están siempre separados.</p>
+ <div class="bar-top"><select data-ch="libA" aria-label="Asignatura">${opts(OA,lib.a)}</select><select data-ch="libO" aria-label="Origen">${opts([['','Todos los orígenes'],['OF','Oficial VIU'],['IA','IA · no oficial'],['EL','Elaborado · no oficial']],lib.o)}</select><input id="libq" type="search" placeholder="Buscar" value="${esc(lib.q)}" aria-label="Buscar"></div><div id="libl">${libList()}</div>`;
+
+V.progreso=()=>`<h1>Progreso</h1><p class="mut">Marca cada casilla al terminar. Cada tema cuenta 4 pasos.</p>${D.asig.map(a=>`<section class="card" style="--c:${COL[a.c]};margin-bottom:14px"><h2>${esc(a.n)} · ${pct(a)} %</h2><div class="bar"><i style="width:${pct(a)}%"></i></div><div class="sc"><table><tr><th>Tema</th>${PK.map(([k,n])=>`<th>${n}</th>`).join('')}</tr>${a.temas.map(x=>`<tr><td>${esc(x.n)}</td>${PK.map(([k,n])=>`<td><input type="checkbox" data-ch="pg" data-v="${a.c}|${x.id}|${k}"${((S.p[a.c]||{})[x.id]||{})[k]?' checked':''} aria-label="${n}: ${esc(x.n)}"></td>`).join('')}</tr>`).join('')}</table></div></section>`).join('')}`;
+
+function render(){
+ const v=(location.hash||'#inicio').slice(1);
+ $('#main').innerHTML=(V[v]||V.inicio)();
+ document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+(V[v]?v:'inicio')));
+}
+function go(v){if(location.hash==='#'+v){render();scrollTo(0,0)}else location.hash=v}
+function copiar(t){const ok=()=>alert('Ruta copiada (dentro de la carpeta VIU_Grado_Marketing).');
+ (navigator.clipboard?navigator.clipboard.writeText(t).then(ok):Promise.reject()).catch(()=>prompt('Copia esta ruta con Ctrl+C:',t))}
+function exp(){const b=new Blob([JSON.stringify({version:1,guardado:new Date().toISOString(),datos:S},null,1)],{type:'application/json'}),a=document.createElement('a');
+ a.href=URL.createObjectURL(b);a.download='campus_datos_'+iso(new Date())+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
+function act(a,v){
+ if(a==='exp')return exp();
+ if(a==='imp')return $('#imp').click();
+ if(a==='ruta')return copiar(v);
+ if(a==='verCal'){cal.a=v;cal.sel=null;return go('calendario')}
+ if(a==='asig')ui.asig=v||null;
+ else if(a==='mes'){const d=new Date(cal.y,cal.m+(+v),1);cal.y=d.getFullYear();cal.m=d.getMonth();cal.sel=null}
+ else if(a==='hoy'){const d=new Date();cal.y=d.getFullYear();cal.m=d.getMonth();cal.sel=iso(d)}
+ else if(a==='dia')cal.sel=cal.sel===v?null:v;
+ else if(a==='est'){S.t[v]=((S.t[v]||0)+1)%3;save()}
+ else if(a==='nueva'){const n=$('#nt-n').value.trim();if(!n){alert('Escribe qué tienes que hacer.');return}
+  S.c.push({id:'c'+Date.now(),a:$('#nt-a').value,n,f:$('#nt-f').value,custom:1});save()}
+ else if(a==='borrar'){S.c=S.c.filter(t=>t.id!==v);delete S.t[v];delete S.ia[v];save()}
+ render();
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(t)act(t.dataset.act,t.dataset.v)});
+document.addEventListener('change',e=>{const t=e.target,c=t.dataset.ch;
+ if(t.id==='imp'){const f=t.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);if(!o||!o.datos)throw 0;if(!confirm('Esto sustituirá tus datos actuales, también en la nube. ¿Continuar?'))return;S=o.datos;norm();save();render();alert('Copia cargada.')}catch(x){alert('Ese archivo no es una copia válida.')}};
+  r.readAsText(f);t.value='';return}
+ if(!c)return;const v=t.dataset.v;
+ if(c==='ia'){S.ia[v]=t.checked;save();return}
+ if(c==='doc'){S.d[v]=t.checked;save();return}
+ if(c==='pg'){const[a,x,k]=v.split('|');S.p[a]=S.p[a]||{};S.p[a][x]=S.p[a][x]||{};S.p[a][x][k]=t.checked;save()}
+ else if(c==='calA')cal.a=t.value;else if(c==='calT')cal.t=t.value;
+ else if(c==='libA')lib.a=t.value;else if(c==='libO')lib.o=t.value;
+ render()});
+document.addEventListener('input',e=>{if(e.target.id==='libq'){lib.q=e.target.value;$('#libl').innerHTML=libList()}});
+
+/* ===== EXPLICACIONES POR SESIÓN: el contenido es público (tabla "sesiones", solo escribe el administrador); el estado de cada sesión es personal ===== */
+let isAdm=false,_u=null,PS=[],psOk=false,psErr='';
+S.ses=S.ses||[];S.sst=S.sst||{};
+const _n=norm;norm=()=>{_n();S.ses=S.ses||[];S.sst=S.sst||{}};norm();
+const ss={a:'',q:'',sel:null,ed:null,vista:'t',play:null};
+const SE=['Pendiente','En curso','Completada'],SB=['b-el','b-pc','b-of'];
+const stOf=id=>S.sst[id]||0;
+const okU=u=>/^https?:\/\//i.test(u||'');
+const fds=f=>f?new Date(f+'T12:00').toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric'}):'';
+function vInfo(u){if(!u)return null;let m;
+ if(!okU(u))return{bad:1};
+ if((m=u.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/)|youtu\.be\/)([\w-]{11})/)))return{emb:'https://www.youtube-nocookie.com/embed/'+m[1],u};
+ if((m=u.match(/vimeo\.com\/(?:video\/)?(\d+)/)))return{emb:'https://player.vimeo.com/video/'+m[1],u};
+ return{u}}
+const sesForm=x=>{x=x||{};const v=k=>esc(x[k]||'');
+ return `<div class="card" style="margin:16px 0"><h2>${x.id?'Editar sesión':'Nueva sesión'}</h2><p class="mut" style="margin:0 0 10px">Lo que guardes aquí será visible para cualquier visitante.</p><div class="fl">
+ <label>Asignatura<select id="f-a">${opts(D.asig.map(a=>[a.c,a.n]),x.a||ss.a||D.asig[0].c)}</select></label>
+ <label>Número o identificador<input id="f-num" value="${v('num')}" placeholder="Sesión 1"></label>
+ <label class="w">Título<input id="f-n" value="${v('n')}" placeholder="Título editable de la sesión"></label>
+ <label>Fecha de la clase<input id="f-f" type="date" value="${v('f')}"></label>
+ <label class="w">Enlace al vídeo (YouTube, Vimeo u otra plataforma)<input id="f-v" type="url" value="${v('v')}" placeholder="https://..."></label>
+ <label class="w">Descripción<textarea id="f-d">${v('d')}</textarea></label>
+ <label class="w">Resumen<textarea id="f-res">${v('res')}</textarea></label>
+ <label class="w">Conceptos clave<textarea id="f-key">${v('key')}</textarea></label>
+ <label class="w">Apuntes<textarea id="f-notes">${v('notes')}</textarea></label>
+ <label class="w">Documentos y materiales (uno por línea: Nombre | https://enlace)<textarea id="f-docs">${esc((x.docs||[]).map(d=>d.n+' | '+d.u).join('\n'))}</textarea></label>
+ <label>Etiquetas (separadas por comas)<input id="f-tags" value="${esc((x.tags||[]).join(', '))}"></label>
+ <label>Observaciones<input id="f-obs" value="${v('obs')}"></label></div>
+ <div class="bar-top"><button class="btn pri" data-sa="guardar">Guardar y publicar</button><button class="btn" data-sa="cancelar">Cancelar</button></div></div>`};
+const sesCard=x=>`<div class="sc-card" style="--c:${COL[x.a]||'#3b5bdb'}"><span class="num">${esc(x.num||'Sesión')} · ${A[x.a]?A[x.a].k:''}</span><h3 style="margin:0">${esc(x.n||'Sin título')}</h3><div class="mut">${fds(x.f)||'Sin fecha'}</div><div>${_u?`<span class="badge ${SB[stOf(x.id)]}">${SE[stOf(x.id)]}</span> `:''}<span class="badge ${x.v?'b-rec':'b-el'}">${x.v?'Con vídeo':'Sin vídeo'}</span></div><button class="btn pri" style="margin-top:auto" data-sa="abrir" data-v="${esc(x.id)}">Abrir sesión</button></div>`;
+V.sesiones=()=>{
+ if(ss.ed!==null)return isAdm?`<h1>Explicaciones por sesión</h1>${sesForm(PS.find(x=>x.id===ss.ed))}`:'<h1>Explicaciones por sesión</h1><p class="mut">Solo el administrador puede editar sesiones.</p>';
+ const x=PS.find(y=>y.id===ss.sel);
+ if(x){const vi=vInfo(x.v),pr=(t,k)=>k?`<div class="card" style="margin-top:16px"><h2>${t}</h2><p style="white-space:pre-wrap;margin:0">${esc(k)}</p></div>`:'';
+  return `<button class="btn" data-sa="volver">‹ Volver</button><p class="num" style="margin:14px 0 4px">${esc(x.num||'Sesión')} · ${A[x.a]?esc(A[x.a].n):''}</p><h1>${esc(x.n)}</h1><p class="mut">${fds(x.f)}</p>
+  <div class="bar-top">${_u?`<select data-sa="estado" data-v="${esc(x.id)}" aria-label="Mi estado">${opts(SE.map((t,i)=>[String(i),t]),String(stOf(x.id)))}</select>`:`<button class="btn" data-ab="login">Inicia sesión para guardar tu progreso</button>`}${isAdm?`<button class="btn" data-sa="editar" data-v="${esc(x.id)}">Editar</button><button class="btn dng" data-sa="borrar" data-v="${esc(x.id)}">Eliminar</button>`:''}</div>
+  ${vi&&vi.emb&&ss.play===x.id?`<div class="vid"><iframe src="${esc(vi.emb)}" title="Vídeo de la sesión" allowfullscreen loading="lazy"></iframe></div><p class="mut">Si el reproductor muestra un error, usa «Abrir vídeo en su plataforma»: algunos entornos bloquean los vídeos incrustados.</p>`:''}
+  ${vi&&vi.u?`<p><a class="btn pri" href="${esc(vi.u)}" target="_blank" rel="noopener">Abrir vídeo en su plataforma</a>${vi.emb&&ss.play!==x.id?` <button class="btn" data-sa="play" data-v="${esc(x.id)}">Reproducir aquí</button>`:''}</p>`:''}
+  ${!x.v?`<div class="empty"><b>Todavía no hay vídeo</b>${isAdm?`<p>Añade un enlace de YouTube u otra plataforma.</p><button class="btn pri" data-sa="editar" data-v="${esc(x.id)}">Añadir vídeo</button>`:''}</div>`:''}
+  ${vi&&vi.bad?'<p class="mut">El enlace del vídeo no es válido.</p>':''}
+  ${pr('Descripción',x.d)}${pr('Resumen',x.res)}${pr('Conceptos clave',x.key)}${pr('Apuntes',x.notes)}${pr('Observaciones',x.obs)}
+  ${(x.docs||[]).filter(d=>okU(d.u)).length?`<div class="card" style="margin-top:16px"><h2>Materiales</h2>${x.docs.filter(d=>okU(d.u)).map(d=>`<p style="margin:6px 0"><a href="${esc(d.u)}" target="_blank" rel="noopener">${esc(d.n)}</a></p>`).join('')}</div>`:''}
+  ${(x.tags||[]).length?`<p style="margin-top:14px">${x.tags.map(t=>`<span class="pill">${esc(t)}</span>`).join('')}</p>`:''}`}
+ if(!psOk)return '<h1>Explicaciones por sesión</h1><p class="mut">Cargando sesiones…</p>';
+ if(psErr)return `<h1>Explicaciones por sesión</h1><div class="empty"><b>No se pudieron cargar las sesiones</b><p>${esc(psErr)}</p><button class="btn pri" data-ab="reload">Reintentar</button></div>`;
+ const q=ss.q.toLowerCase(),l=PS.filter(y=>(!ss.a||y.a===ss.a)&&(!q||((y.n||'')+' '+(y.tags||[]).join(' ')).toLowerCase().includes(q))).sort((a,b)=>(a.f||'9').localeCompare(b.f||'9')||(a.num||'').localeCompare(b.num||'',undefined,{numeric:true}));
+ return `<h1>Explicaciones por sesión</h1><p class="mut">Grado en Marketing · ${esc(D.curso)}. Explicaciones, vídeos y materiales de cada sesión. Los títulos son del autor, no el temario oficial de VIU.</p>
+ <div class="bar-top">${isAdm?'<button class="btn pri" data-sa="nueva">Nueva sesión</button>':''}<select data-sa="filtro" aria-label="Asignatura">${opts(OA,ss.a)}</select><input id="sq" type="search" placeholder="Buscar sesión o etiqueta" value="${esc(ss.q)}"><button class="btn" data-sa="vista">${ss.vista==='t'?'Ver como lista':'Ver como tarjetas'}</button></div>
+ ${!l.length?`<div class="empty"><b>Aún no hay sesiones${ss.a?' en esta asignatura':''}</b>${isAdm?'<p>Crea la primera para empezar a añadir vídeos y apuntes.</p><button class="btn pri" data-sa="nueva">Crear sesión</button>':''}</div>`
+ :ss.vista==='t'?`<div class="sg">${l.map(sesCard).join('')}</div>`
+ :`<div class="card sc"><table><tr><th>Sesión</th><th>Asig.</th><th>Fecha</th><th>Vídeo</th>${_u?'<th>Mi estado</th>':''}<th></th></tr>${l.map(y=>`<tr><td>${esc(y.num||'')} ${esc(y.n)}</td><td>${tag(y.a)}</td><td>${fds(y.f)}</td><td>${y.v?'Sí':'No'}</td>${_u?`<td>${SE[stOf(y.id)]}</td>`:''}<td><button class="btn" data-sa="abrir" data-v="${esc(y.id)}">Abrir</button></td></tr>`).join('')}</table></div>`}`};
+const _i=V.inicio;V.inicio=()=>{
+ const l=PS.slice().sort((a,b)=>(b.upd||0)-(a.upd||0)),ult=_u?PS.find(y=>y.id===S.last):null,rec=l.slice(0,3),tot=PS.length,ok=_u?PS.filter(y=>stOf(y.id)===2).length:0;
+ const inv=_u?'':`<section class="card" style="margin:16px 0"><h2>Estás viendo el campus como invitado</h2><p class="mut" style="margin:0 0 10px">Todo el contenido es público. Crea una cuenta gratuita solo si quieres guardar tu progreso, tus tareas y tus dudas.</p><button class="btn pri" data-ab="login">Iniciar sesión o crear cuenta</button></section>`;
+ const ex=`${inv}<section class="card" style="margin:16px 0"><h2>Explicaciones por sesión</h2>${tot?`${_u?`<p class="mut">${ok} de ${tot} sesiones completadas (${Math.round(100*ok/tot)} %).</p><div class="bar"><i style="width:${Math.round(100*ok/tot)}%;background:var(--acc)"></i></div>`:`<p class="mut">${tot} sesiones publicadas.</p>`}${ult?`<p>Continuar: <b>${esc(ult.n)}</b></p><button class="btn pri" data-sa="abrir" data-v="${esc(ult.id)}">Continuar sesión</button> `:''}<button class="btn" data-sa="irsesiones">Ver todas</button>${rec.length?'<h3 style="margin-top:14px">Últimas añadidas o editadas</h3>'+rec.map(y=>`<p style="margin:4px 0"><a href="#sesiones" data-sa="abrir" data-v="${esc(y.id)}">${esc(y.n)}</a> <span class="mut">· ${A[y.a]?A[y.a].k:''}</span></p>`).join(''):''}`:`<p class="mut">${psOk?'Todavía no hay sesiones publicadas.':'Cargando sesiones…'}</p>${isAdm?'<button class="btn pri" data-sa="nueva">Crear primera sesión</button>':''}`}</section>`;
+ return _i().replace('<div class="grid">',ex+'<div class="grid">')};
+const val=id=>document.getElementById(id).value.trim();
+async function pubSes(o){const r=await sb.from('sesiones').upsert({id:o.id,asignatura:o.a||'',data:o,updated_at:new Date().toISOString()}).select('id');if(r.error)throw r.error;if(!r.data||!r.data.length)throw new Error('el servidor no aceptó el cambio (¿sesión de administrador caducada?)')}
+async function delSes(id){const r=await sb.from('sesiones').delete().eq('id',id).select('id');if(r.error)throw r.error;if(!r.data||!r.data.length)throw new Error('el servidor no permitió borrarla (¿sesión de administrador caducada?)')}
+document.addEventListener('click',async e=>{const t=e.target.closest('[data-sa]');if(!t)return;
+ const a=t.dataset.sa,v=t.dataset.v;if(a==='estado'||a==='filtro')return;e.preventDefault();
+ if(['nueva','editar','borrar','guardar'].includes(a)&&!isAdm)return;
+ try{
+  if(a==='nueva'){ss.ed='';ss.sel=null;go('sesiones')}
+  else if(a==='irsesiones'){ss.sel=null;ss.ed=null;go('sesiones')}
+  else if(a==='abrir'){ss.sel=v;ss.ed=null;ss.play=null;S.last=v;save();go('sesiones')}
+  else if(a==='volver'){ss.sel=null}
+  else if(a==='editar'){ss.ed=v}
+  else if(a==='cancelar'){ss.ed=null}
+  else if(a==='vista'){ss.vista=ss.vista==='t'?'l':'t'}
+  else if(a==='play'){ss.play=v}
+  else if(a==='borrar'){if(!confirm('¿Eliminar esta sesión? Dejará de ser visible para todos y no se puede deshacer.'))return;await delSes(v);PS=PS.filter(y=>y.id!==v);if(S.last===v){S.last=null;save()}ss.sel=null}
+  else if(a==='guardar'){const vu=val('f-v');if(!val('f-n')){alert('Escribe un título.');return}
+   if(vu&&!okU(vu)){alert('El enlace del vídeo debe empezar por http:// o https://');return}
+   const docs=document.getElementById('f-docs').value.split('\n').map(r=>r.trim()).filter(Boolean).map(r=>{const i=r.lastIndexOf('|');const u=(i<0?r:r.slice(i+1)).trim();return{n:(i<0?u:r.slice(0,i).trim())||u,u}}).filter(d=>okU(d.u));
+   const prev=ss.ed?PS.find(y=>y.id===ss.ed):null;
+   const o={id:prev?prev.id:'s'+Date.now(),a:val('f-a'),num:val('f-num'),n:val('f-n'),f:val('f-f'),v:vu,d:document.getElementById('f-d').value,res:document.getElementById('f-res').value,key:document.getElementById('f-key').value,notes:document.getElementById('f-notes').value,docs,tags:val('f-tags').split(',').map(x=>x.trim()).filter(Boolean),obs:val('f-obs'),upd:Date.now()};
+   t.disabled=true;
+   try{await pubSes(o)}catch(err){t.disabled=false;throw err}
+   const i=PS.findIndex(y=>y.id===o.id);if(i<0)PS.push(o);else PS[i]=o;
+   ss.sel=o.id;S.last=o.id;ss.ed=null;save()}
+ }catch(err){alert('No se pudo completar la acción: '+((err&&err.message)||err));return}
+ render();scrollTo(0,0)});
+document.addEventListener('change',e=>{const t=e.target,a=t.dataset.sa;
+ if(a==='estado'){if(!_u)return;S.sst[t.dataset.v]=+t.value;S.last=t.dataset.v;save();render()}
+ else if(a==='filtro'){ss.a=t.value;render()}});
+document.addEventListener('input',e=>{if(e.target.id==='sq'){ss.q=e.target.value;const p=e.target.selectionStart;render();const n=document.getElementById('sq');n.focus();n.setSelectionRange(p,p)}});
+
+const _i2=V.inicio;V.inicio=()=>_i2().replace('<h1>Inicio</h1>',`<div class="banner"><svg viewBox="0 0 1200 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1c1e22"/><stop offset="1" stop-color="#42464d"/></linearGradient></defs><rect width="1200" height="360" fill="url(#hg)"/><circle cx="930" cy="120" r="160" fill="#c0262d" opacity=".22"/><g stroke="rgba(255,255,255,.07)" stroke-width="2"><path d="M0 90H1200M0 180H1200M0 270H1200"/></g><g fill="rgba(255,255,255,.09)"><rect x="620" y="200" width="70" height="160"/><rect x="700" y="150" width="90" height="210"/><rect x="800" y="220" width="60" height="140"/><rect x="870" y="110" width="110" height="250"/><rect x="990" y="180" width="80" height="180"/><rect x="1080" y="140" width="90" height="220"/></g><polyline points="560,300 680,262 780,276 880,200 980,150 1100,70" fill="none" stroke="#e0454b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><g fill="#e0454b"><circle cx="880" cy="200" r="7"/><circle cx="980" cy="150" r="7"/><circle cx="1100" cy="70" r="7"/></g></svg><div class="bt"><small>Grado en Marketing · VIU</small><h1>Bienvenido a tu campus</h1><i></i></div></div>`);
+
+/* ===== MIS DUDAS (por asignatura, vacío al inicio) ===== */
+const _n2=norm;norm=()=>{_n2();S.du=S.du||[]};norm();
+const dudasCard=a=>{const l=S.du.filter(d=>d.a===a);return `<div class="card"><h2>Mis dudas</h2>${l.map(d=>`<label style="display:flex;gap:8px;align-items:flex-start;margin:6px 0"><input type="checkbox" data-du="r" data-v="${d.id}"${d.r?' checked':''}><span style="flex:1">${esc(d.t)}</span><button class="btn" data-du="x" data-v="${d.id}">Eliminar</button></label>`).join('')||'<p class="mut">Aún no has añadido dudas.</p>'}<div class="bar-top"><input id="du-t" placeholder="Escribe una duda" size="28"><button class="btn" data-du="add" data-v="${a}">Añadir</button></div></div>`};
+const _as=V.asignaturas;V.asignaturas=()=>{const h=_as();return ui.asig?h.replace(/<\/div>\s*$/,dudasCard(ui.asig)+'</div>'):h};
+document.addEventListener('click',e=>{const t=e.target.closest('button[data-du]');if(!t)return;const k=t.dataset.du,v=t.dataset.v;
+ if(k==='add'){const x=document.getElementById('du-t').value.trim();if(!x)return;S.du.push({id:'d'+Date.now(),a:v,t:x,r:0})}
+ else if(k==='x'){S.du=S.du.filter(d=>d.id!==v)}save();render()});
+document.addEventListener('change',e=>{const t=e.target;if(t.dataset.du==='r'){const d=S.du.find(x=>x.id===t.dataset.v);if(d){d.r=t.checked?1:0;save()}}});
+
+/* ===== SUPABASE: acceso público de lectura + cuentas opcionales (URL y clave publishable/anon; NUNCA la service_role) ===== */
+const SUPABASE_URL='https://ldmrsfbrsyjjjgbowito.supabase.co/';
+const SUPABASE_KEY='sb_publishable_Z_HhG5dvqCLgI-bAla8c7w_BdTCMb3b';
+const _cfg=/^https:\/\/[^\/]+\.supabase\.co\/?$/.test(SUPABASE_URL)&&SUPABASE_KEY.length>20&&!/PEGA_AQUI/.test(SUPABASE_KEY);
+const sb=(_cfg&&window.supabase)?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}}):null;
+let _ver=null,loaded=false,dirty=false,busy=false,rev=0,_tm=null,gmode='in';
+const $s=id=>document.getElementById(id);
+function setStatus(k,m){const e=$s('sync');if(!e)return;const T={ok:'Guardado en la nube',pend:'Cambios sin guardar…',save:'Guardando…',load:'Cargando…',err:'Error al guardar',errc:'No se pudo cargar'};e.textContent=(T[k]||k)+(m&&(k==='err'||k==='errc')?': '+m:'');e.dataset.k=k}
+function modo(){document.body.classList.toggle('anon',!_u);$s('who').textContent=_u?((_u.email||'')+(isAdm?' · Administrador':'')):'Invitado'}
+
+/* --- Contenido público (lectura sin cuenta) --- */
+async function cargarPublico(){
+ if(!sb)return;
+ const r=await sb.from('sesiones').select('data').order('updated_at',{ascending:false});
+ let nuevo=PS,err='';
+ if(r.error)err=r.error.message||'error de red';else nuevo=(r.data||[]).map(x=>x.data).filter(x=>x&&x.id);
+ const cambio=!psOk||err!==psErr||JSON.stringify(nuevo)!==JSON.stringify(PS);
+ psOk=true;psErr=err;PS=nuevo;
+ if(cambio&&ss.ed===null)render()}
+
+/* --- Datos personales (requieren cuenta) --- */
+const vacio=o=>!o||(!['t','ia','p','d','sst'].some(k=>Object.keys(o[k]||{}).length)&&!['c','ses','du'].some(k=>(o[k]||[]).length));
+const save=()=>{if(!_u)return;if(!loaded){setStatus('errc','tus datos aún no se han cargado; el último cambio NO se ha guardado');return}dirty=true;rev++;setStatus('pend');clearTimeout(_tm);_tm=setTimeout(push,1000)};
+async function push(){
+ if(!sb||!_u||!loaded||busy)return;
+ if(vacio(S)&&_ver){dirty=false;setStatus('err','no se sobrescribe la nube con un estado vacío');return}
+ busy=true;setStatus('save');const my=rev,now=new Date().toISOString(),payload=JSON.parse(JSON.stringify(S));
+ try{
+  if(_ver===null){const r=await sb.from('app_state').insert({user_id:_u.id,data:payload,updated_at:now}).select('updated_at');
+   if(r.error){busy=false;if(r.error.code==='23505')return conflicto();throw r.error}_ver=r.data[0].updated_at}
+  else{const r=await sb.from('app_state').update({data:payload,updated_at:now}).eq('user_id',_u.id).eq('updated_at',_ver).select('updated_at');
+   if(r.error)throw r.error;if(!r.data||!r.data.length){busy=false;return conflicto()}_ver=r.data[0].updated_at}
+  busy=false;if(rev!==my)push();else{dirty=false;setStatus('ok')}
+ }catch(e){busy=false;setStatus('err',(e&&e.message)||'sin conexión');clearTimeout(_tm);_tm=setTimeout(push,8000)}}
+function aplicar(row){S=(row.data&&typeof row.data==='object')?row.data:{};norm();_ver=row.updated_at;dirty=false;render();setStatus('ok')}
+async function conflicto(){
+ const r=await sb.from('app_state').select('data,updated_at').eq('user_id',_u.id).maybeSingle();
+ if(r.error||!r.data){setStatus('err',(r.error&&r.error.message)||'conflicto sin resolver');return}
+ if(confirm('Se han guardado cambios más recientes desde otro dispositivo.\n\nAceptar: cargar la versión de la nube (se descartan tus últimos cambios sin guardar).\nCancelar: conservar los tuyos y sobrescribir la nube.'))aplicar(r.data);
+ else{_ver=r.data.updated_at;push()}}
+async function cargar(){
+ setStatus('load');
+ const r=await sb.from('app_state').select('data,updated_at').eq('user_id',_u.id).maybeSingle();
+ if(r.error){setStatus('errc',r.error.message);setTimeout(()=>{if(_u&&!loaded)cargar()},6000);return}
+ loaded=true;
+ if(r.data)aplicar(r.data);
+ else{S={};norm();_ver=null;render();setStatus('ok');
+  let loc=null;try{loc=JSON.parse(localStorage.getItem(K))}catch(e){}
+  if(loc&&!vacio(loc)&&confirm('Se han encontrado datos guardados en este navegador. ¿Subirlos a tu cuenta?')){S=loc;norm();render();save()}}}
+
+/* --- Migración única: las sesiones que el administrador tenía guardadas en su cuenta pasan a ser públicas --- */
+async function migrar(){
+ const old=(S.ses||[]).filter(x=>x&&x.id);if(!old.length)return;
+ if(!confirm('Se han encontrado '+old.length+' sesiones guardadas en tu cuenta de antes. ¿Publicarlas ahora para que las vea cualquier visitante?\n\nTu estado en cada sesión (pendiente/completada) se conserva como progreso personal.'))return;
+ try{
+  const rows=old.map(x=>{const c=Object.assign({},x);delete c.st;return{id:x.id,asignatura:x.a||'',data:c,updated_at:new Date().toISOString()}});
+  const r=await sb.from('sesiones').upsert(rows).select('id');if(r.error)throw r.error;
+  old.forEach(x=>{if(x.st)S.sst[x.id]=x.st});S.ses=[];save();await cargarPublico();alert('Sesiones publicadas: '+old.length+'.')
+ }catch(e){alert('No se pudieron publicar las sesiones: '+((e&&e.message)||e))}}
+
+/* --- Sesión de usuario --- */
+function lock(){_u=null;isAdm=false;loaded=false;dirty=false;_ver=null;S={};norm();ss.ed=null;modo();render()}
+async function entrar(u){if(_u&&_u.id===u.id)return;_u=u;loaded=false;isAdm=false;modo();cerrarLogin();
+ const [ad]=await Promise.all([sb.rpc('is_admin'),cargar()]);
+ if(!_u||_u.id!==u.id)return;
+ isAdm=!ad.error&&ad.data===true;modo();render();if(isAdm&&loaded)migrar()}
+if(sb){sb.auth.onAuthStateChange((ev,ses)=>{setTimeout(()=>{if(ses&&ses.user)entrar(ses.user);else if(ev==='SIGNED_OUT')lock()},0)});cargarPublico()}
+else{psOk=true;psErr=window.supabase?'Falta configurar Supabase: rellena SUPABASE_URL y SUPABASE_KEY en el archivo.':'No se pudo cargar la librería de Supabase (¿sin conexión?).'}
+
+/* --- Diálogo de acceso (opcional) --- */
+function gmsg(t,ok){const e=$s('gmsg');e.textContent=t||'';e.classList.toggle('ok',!!ok)}
+function setMode(m){gmode=m;$s('gb').textContent=m==='in'?'Iniciar sesión':'Crear cuenta';$s('gp').autocomplete=m==='in'?'current-password':'new-password';document.querySelectorAll('[data-gm]').forEach(b=>b.classList.toggle('on',b.dataset.gm===m));gmsg('')}
+function abrirLogin(info){if(!sb){alert(psErr||'Supabase no está disponible.');return}setMode('in');$s('ginfo').textContent=info||'No necesitas cuenta para ver el campus. Solo la necesitas para guardar tu progreso.';$s('gate').classList.add('open');$s('ge').focus()}
+function cerrarLogin(){$s('gate').classList.remove('open')}
+const PERS='[data-ch="ia"],[data-ch="doc"],[data-ch="pg"],[data-act="est"],[data-act="nueva"],[data-act="borrar"],[data-du],[data-act="exp"],[data-act="imp"]';
+document.addEventListener('click',e=>{if(_u)return;const t=e.target.closest(PERS);if(!t)return;e.preventDefault();e.stopImmediatePropagation();abrirLogin('Inicia sesión o crea una cuenta gratuita para guardar tu progreso.')},true);
+document.addEventListener('click',e=>{
+ if(e.target.closest('[data-ab="login"],#inb,#nav-login'))return abrirLogin();
+ if(e.target.closest('[data-ab="reload"]'))return cargarPublico();
+ const g=e.target.closest('[data-gm]');if(g)return setMode(g.dataset.gm);
+ if(e.target.closest('#gx')||e.target===$s('gate'))cerrarLogin()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrarLogin()});
+$s('gf').addEventListener('submit',async e=>{e.preventDefault();if(!sb)return;
+ const em=$s('ge').value.trim(),pw=$s('gp').value,b=$s('gb');
+ if(!em||!pw){gmsg('Escribe tu correo y tu contraseña.');return}
+ if(gmode==='up'&&pw.length<8){gmsg('La contraseña debe tener al menos 8 caracteres.');return}
+ b.disabled=true;gmsg('');
+ if(gmode==='in'){const r=await sb.auth.signInWithPassword({email:em,password:pw});b.disabled=false;
+  if(r.error)gmsg(/Invalid login/i.test(r.error.message)?'Correo o contraseña incorrectos.':/not confirmed/i.test(r.error.message)?'Confirma tu correo antes de entrar (revisa tu bandeja).':'No se pudo iniciar sesión: '+r.error.message)}
+ else{const r=await sb.auth.signUp({email:em,password:pw,options:{emailRedirectTo:location.origin+location.pathname}});b.disabled=false;
+  if(r.error)gmsg('No se pudo crear la cuenta: '+r.error.message);
+  else if(!r.data.session)gmsg('Cuenta creada. Revisa tu correo para confirmarla y después inicia sesión.',1)}
+ $s('gp').value=''});
+$s('out').addEventListener('click',async()=>{if(dirty&&!confirm('Hay cambios sin guardar. ¿Cerrar sesión igualmente?'))return;await sb.auth.signOut();lock()});
+document.addEventListener('visibilitychange',async()=>{if(document.hidden||!sb)return;
+ if(ss.ed===null)cargarPublico();
+ if(!_u||!loaded||dirty||busy||ss.ed!==null)return;
+ const r=await sb.from('app_state').select('data,updated_at').eq('user_id',_u.id).maybeSingle();
+ if(!r.error&&r.data&&r.data.updated_at!==_ver&&!dirty)aplicar(r.data)});
+addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
+
+/* Aviso para invitados en las vistas de progreso y tareas */
+['progreso','tareas'].forEach(k=>{const f=V[k];V[k]=()=>{const h=f();return _u?h:h.replace('</p>','</p><div class="card" style="margin:12px 0"><b>Estás como invitado.</b> <span class="mut">Para guardar tu progreso, tus tareas y tus dudas necesitas una cuenta gratuita.</span> <button class="btn pri" data-ab="login">Iniciar sesión o crear cuenta</button></div>')}});
+modo();
+
+addEventListener('hashchange',()=>{render();scrollTo(0,0)});
+render();
+</script>
+</body>
+</html>
